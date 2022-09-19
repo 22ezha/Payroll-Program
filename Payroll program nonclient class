@@ -1,0 +1,55 @@
+/******************************************************************************
+Eric Zhang
+Comp Sci 3
+1/12/2021
+Payroll Program: graded
+*******************************************************************************/
+public class Employee
+{
+    private String first;
+    private String last;
+    private double hours;
+    private int scale;
+    
+    public Employee ()
+    {
+        first = "last";
+        last = "first";
+        hours = -1.0;
+        scale = -1;
+    }
+    public Employee (String f, String l, double h, int s)
+    {
+        first = f;
+        last = l;
+        hours = h;
+        scale = s;
+    }
+    public String getFirst ()
+    {
+        return first;
+    }
+    public String getLast ()
+    {
+        return last;
+    }
+    public double getHours ()
+    {
+        return hours;
+    }
+    public double getScale ()
+    {
+        return scale;
+    }
+    public boolean check (Employee other)
+    {
+        if (first.equals(other.first))
+        {
+            if (last.equals(other.last))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}
