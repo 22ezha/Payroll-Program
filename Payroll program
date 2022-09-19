@@ -1,0 +1,84 @@
+/******************************************************************************
+Eric Zhang
+Comp Sci 3
+1/29/2021
+Payroll Program
+*******************************************************************************/
+import java.io.*;
+public class Main
+{
+    public static String cap (String word)
+    {
+        String hold;
+        hold = word.substring(0,1);
+        word = word.toLowerCase ();
+        hold = hold.toUpperCase ();
+        word = word.substring(1);
+        word =(hold + word);
+        return word;
+    }
+	public static void main(String[] args) throws IOException
+	{
+		DataInputStream reader = new DataInputStream(System.in);
+		final double [] payscale = {0, 7.15, 9.5, 13.75};
+		int input;
+		String first;
+		String last;
+		double hours;
+		int scale;
+		double totalpay = 0;
+		double pay;
+		int i;
+		int num;
+		boolean check = false;
+		System.out.print("How many employees work at your company? ");
+		input = Integer.parseInt(reader.readLine());
+		Employee [] employee = new Employee [input + 1];
+		
+		for (i = 1; i<= input; i ++)
+		{
+		    System.out.print("\nWhat is Employee #"+i+"'s first name? ");
+		    first = reader.readLine();
+		    first = cap(first);
+		    System.out.print("What is Employee #"+i+"'s last name? ");
+		    last = reader.readLine();
+		    last = cap(last);
+		    System.out.print("How many hours did "+first +" " + last + " work this week? ");
+		    hours = Double.parseDouble(reader.readLine());
+		    System.out.print("What pay scale is "+first +" " + last + " on? ");
+		    scale = Integer.parseInt(reader.readLine());
+		    
+		    employee [i] = new Employee (first, last, hours, scale);
+		}
+		for (i=1;i<=input;i++)
+		{
+		    pay = employee[i].getHours() * payscale(employee[i].getScale());
+		    System.out.println("\n"+employee[i].getFirst()+" "+employee[i].getLast()+" should be payed $"+pay+" this week.");
+		    totalpay += pay;
+		}
+		System.out.println("\nYour total payroll for the week is $"+totalpay+".");
+		for (i=1; i <= (input - 1); i ++)
+		{
+		    for (int a = (i + 1); a <= input; a++)
+		    {
+		        if (employee[i].check(employee[a]))
+		        {
+		            check = true;
+		            a = input + 1;
+		            i = input;
+		        }
+		    }
+		}
+		if (check == true)
+		{
+		    System.out.print("\nSome of your employees have the same name.");
+		}
+		else 
+		{
+		    System.out.print("\nNone of your employees have the same name.");
+		}
+		    
+		
+	}
+	
+}
